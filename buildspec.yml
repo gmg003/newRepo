@@ -2,15 +2,24 @@ version: 0.2
 
 phases:
   install:
-    runtime-versions:
-      java: openjdk17
+    commands:
+      # Install OpenJDK 17 or Amazon Corretto
+      - echo "Installing Amazon Corretto OpenJDK 17..."
+      - yum install -y java-17-amazon-corretto-devel  # Attempt to install Corretto JDK 17
+      - echo "Setting JAVA_HOME..."
+      - export JAVA_HOME=/usr/lib/jvm/java-17-amazon-corretto
+      - export JRE_HOME=$JAVA_HOME
+      - export JDK_HOME=$JAVA_HOME
+
   build:
     commands:
-      - javac src/Main.java
+      - echo "Building the application..."
+      - mvn clean install  # Replace with your own build commands if needed
+
   post_build:
     commands:
-      - echo Build successful!
+      - echo "Post build steps here..."
 
 artifacts:
   files:
-    - src/*.class
+    - target/*.jar  # Replace with your artifact paths
