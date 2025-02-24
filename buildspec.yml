@@ -1,0 +1,16 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: openjdk17
+  build:
+    commands:
+      - javac src/Main.java
+  post_build:
+    commands:
+      - echo Build successful!
+
+artifacts:
+  files:
+    - src/*.class
